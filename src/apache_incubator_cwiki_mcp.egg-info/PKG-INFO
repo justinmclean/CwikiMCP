@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: apache-incubator-cwiki-mcp
+Version: 0.1.0
+Summary: MCP server for the Apache Incubator Confluence wiki.
+License-Expression: Apache-2.0
+Keywords: mcp,confluence,apache,incubator,cwiki
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: mcp>=1.12.0
+Provides-Extra: dev
+Requires-Dist: coverage>=7.0; extra == "dev"
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: ruff>=0.8.0; extra == "dev"
+
+# Apache Incubator CWiki MCP
+
+MCP server for the Apache Incubator Confluence space:
+
+<https://cwiki.apache.org/confluence/display/INCUBATOR>
+
+The server is read-only and works against public wiki pages.
+
+GET responses are cached locally by default for six hours. Use `force_refresh=true` on read tools to bypass the cache for a single call.
+
+## Install
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -e .
+```
+
+## Run
+
+```sh
+apache-incubator-cwiki-mcp
+```
+
+For local development:
+
+```sh
+python -m apache_incubator_cwiki_mcp.server
+```
+
+## Test
+
+```sh
+pip install -e ".[dev]"
+make check
+```
+
+## Configure With Codex or Claude Desktop
+
+Use the Python module entrypoint:
+
+```json
+{
+  "mcpServers": {
+    "apache-incubator-cwiki": {
+      "command": "/Users/justinmclean/CwikiMCP/.venv/bin/python",
+      "args": ["-m", "apache_incubator_cwiki_mcp.server"],
+      "env": {
+        "CWIKI_BASE_URL": "https://cwiki.apache.org/confluence",
+        "CWIKI_SPACE_KEY": "INCUBATOR"
+      }
+    }
+  }
+}
+```
+
+## Tools
+
+- `cwiki_space_info`: return metadata for the configured Confluence space.
+- `cwiki_list_pages`: list pages in the Incubator space.
+- `cwiki_search_pages`: search pages with Confluence CQL.
+- `cwiki_get_page`: fetch a page by title or `page_id`.
+- `cwiki_get_children`: list child pages for a `page_id`.
+- `cwiki_cache_info`: show local cache settings and size.
+- `cwiki_clear_cache`: clear the local cache.
+
+## Environment
+
+- `CWIKI_BASE_URL`: defaults to `https://cwiki.apache.org/confluence`.
+- `CWIKI_SPACE_KEY`: defaults to `INCUBATOR`.
+- `CWIKI_CACHE_DIR`: defaults to `.cache/cwiki`.
+- `CWIKI_CACHE_TTL_SECONDS`: defaults to `21600` seconds. Set to `0` to disable caching.

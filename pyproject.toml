@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apache-incubator-cwiki-mcp"
+version = "0.1.0"
+description = "MCP server for the Apache Incubator Confluence wiki."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = [
+  "mcp>=1.12.0"
+]
+keywords = [
+  "mcp",
+  "confluence",
+  "apache",
+  "incubator",
+  "cwiki"
+]
+
+[project.optional-dependencies]
+dev = [
+  "coverage>=7.0",
+  "pytest>=8.0",
+  "ruff>=0.8.0"
+]
+
+[project.scripts]
+apache-incubator-cwiki-mcp = "apache_incubator_cwiki_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.coverage.run]
+branch = true
+source = ["apache_incubator_cwiki_mcp"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
