@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-CACHE_TTL_SECONDS = int(os.getenv("CWIKI_CACHE_TTL_SECONDS", "21600"))
+CACHE_TTL_SECONDS = int(os.getenv("CWIKI_CACHE_TTL_SECONDS", "2592000"))
 CACHE_DIR = Path(os.getenv("CWIKI_CACHE_DIR", ".cache/cwiki")).expanduser()
 
 
