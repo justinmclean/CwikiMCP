@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 
-from apache_incubator_cwiki_mcp.tools import mcp
+from incubator_cwiki_mcp.tools import mcp
 
 
 def main() -> None:

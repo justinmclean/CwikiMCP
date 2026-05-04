@@ -1,5 +1,5 @@
 Metadata-Version: 2.4
-Name: apache-incubator-cwiki-mcp
+Name: incubator-cwiki-mcp
 Version: 0.1.0
 Summary: MCP server for the Apache Incubator Confluence wiki.
 License-Expression: Apache-2.0
@@ -57,7 +57,7 @@ Use the Python module entrypoint:
 {
   "mcpServers": {
     "apache-incubator-cwiki": {
-      "command": "/Users/justinmclean/CwikiMCP/.venv/bin/python",
+      "command": "<Path to CwikiMCP>/.venv/bin/python",
       "args": ["-m", "apache_incubator_cwiki_mcp.server"],
       "env": {
         "CWIKI_BASE_URL": "https://cwiki.apache.org/confluence",

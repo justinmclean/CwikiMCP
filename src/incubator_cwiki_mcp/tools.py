@@ -7,7 +7,7 @@ from typing import Any, Literal
 
 from mcp.server.fastmcp import FastMCP
 
-from apache_incubator_cwiki_mcp import cache, client
+from incubator_cwiki_mcp import cache, client
 
 mcp = FastMCP("apache-incubator-cwiki-mcp")
 

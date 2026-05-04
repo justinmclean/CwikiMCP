@@ -43,7 +43,7 @@ Use the Python module entrypoint:
 {
   "mcpServers": {
     "apache-incubator-cwiki": {
-      "command": "/Users/justinmclean/CwikiMCP/.venv/bin/python",
+      "command": "<Path to CwikiMCP>/.venv/bin/python",
       "args": ["-m", "apache_incubator_cwiki_mcp.server"],
       "env": {
         "CWIKI_BASE_URL": "https://cwiki.apache.org/confluence",

@@ -7,7 +7,7 @@ import urllib.parse
 import urllib.request
 from typing import Any
 
-from apache_incubator_cwiki_mcp import cache
+from incubator_cwiki_mcp import cache
 
 BASE_URL = os.getenv("CWIKI_BASE_URL", "https://cwiki.apache.org/confluence").rstrip("/")
 SPACE_KEY = os.getenv("CWIKI_SPACE_KEY", "INCUBATOR")

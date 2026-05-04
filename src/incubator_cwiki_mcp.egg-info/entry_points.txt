@@ -1,0 +1,2 @@
+[console_scripts]
+incubator-cwiki-mcp = incubator_cwiki_mcp.server:main

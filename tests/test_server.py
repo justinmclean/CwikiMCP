@@ -6,7 +6,7 @@ import urllib.error
 
 import pytest
 
-from apache_incubator_cwiki_mcp import cache, client, tools
+from incubator_cwiki_mcp import cache, client, tools
 
 
 @pytest.fixture(autouse=True)
