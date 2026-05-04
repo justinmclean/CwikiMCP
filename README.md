@@ -6,7 +6,7 @@ MCP server for the Apache Incubator Confluence space:
 
 The server is read-only and works against public wiki pages.
 
-GET responses are cached locally by default for six hours. Use `force_refresh=true` on read tools to bypass the cache for a single call.
+GET responses are cached locally by default for 30 days. Use `force_refresh=true` on read tools to bypass the cache for a single call.
 
 ## Install
 
@@ -19,13 +19,13 @@ pip install -e .
 ## Run
 
 ```sh
-apache-incubator-cwiki-mcp
+incubator-cwiki-mcp
 ```
 
 For local development:
 
 ```sh
-python -m apache_incubator_cwiki_mcp.server
+python -m incubator_cwiki_mcp.server
 ```
 
 ## Test
@@ -42,9 +42,9 @@ Use the Python module entrypoint:
 ```json
 {
   "mcpServers": {
-    "apache-incubator-cwiki": {
+    "incubator-cwiki": {
       "command": "<Path to CwikiMCP>/.venv/bin/python",
-      "args": ["-m", "apache_incubator_cwiki_mcp.server"],
+      "args": ["-m", "incubator_cwiki_mcp.server"],
       "env": {
         "CWIKI_BASE_URL": "https://cwiki.apache.org/confluence",
         "CWIKI_SPACE_KEY": "INCUBATOR"
@@ -69,4 +69,4 @@ Use the Python module entrypoint:
 - `CWIKI_BASE_URL`: defaults to `https://cwiki.apache.org/confluence`.
 - `CWIKI_SPACE_KEY`: defaults to `INCUBATOR`.
 - `CWIKI_CACHE_DIR`: defaults to `.cache/cwiki`.
-- `CWIKI_CACHE_TTL_SECONDS`: defaults to `21600` seconds. Set to `0` to disable caching.
+- `CWIKI_CACHE_TTL_SECONDS`: defaults to `2592000` seconds (30 days). Set to `0` to disable caching.
