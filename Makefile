@@ -3,14 +3,15 @@ VENV ?= .venv
 VENV_PYTHON := $(VENV)/bin/python
 VENV_PIP := $(VENV)/bin/pip
 
-.PHONY: help venv install lint test coverage check run clean
+.PHONY: help venv install lint typecheck test coverage check run clean
 
 help:
 	@printf "Targets:\n"
 	@printf "  make venv     Create the local virtual environment\n"
 	@printf "  make install  Install package and dev dependencies\n"
-	@printf "  make lint     Run Ruff lint checks\n"
-	@printf "  make test     Run unit tests\n"
+	@printf "  make lint      Run Ruff lint checks\n"
+	@printf "  make typecheck Run mypy type checks\n"
+	@printf "  make test      Run unit tests\n"
 	@printf "  make coverage Run tests with coverage\n"
 	@printf "  make check    Run lint and tests\n"
 	@printf "  make run      Run the MCP server\n"
@@ -25,6 +26,9 @@ install: venv
 lint:
 	$(VENV_PYTHON) -m ruff check src tests
 
+typecheck:
+	$(VENV_PYTHON) -m mypy
+
 test:
 	$(VENV_PYTHON) -m pytest -q
 
@@ -32,7 +36,7 @@ coverage:
 	$(VENV_PYTHON) -m coverage run -m pytest -q
 	$(VENV_PYTHON) -m coverage report -m
 
-check: lint test
+check: lint typecheck test
 
 run:
 	$(VENV_PYTHON) -m apache_incubator_cwiki_mcp.server

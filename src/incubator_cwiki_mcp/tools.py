@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 import urllib.parse
 from html.parser import HTMLParser
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
 from mcp.server.fastmcp import FastMCP
 
@@ -169,7 +169,7 @@ def cwiki_clear_cache() -> dict[str, Any]:
 def page_content(page: dict[str, Any], format: Literal["plain", "view", "storage"]) -> str:
     body = page.get("body", {})
     if format == "storage":
-        return body.get("storage", {}).get("value", "")
+        return cast(str, body.get("storage", {}).get("value", ""))
 
     view = body.get("view", {}).get("value") or body.get("storage", {}).get("value", "")
     return html_to_text(view) if format == "plain" else view

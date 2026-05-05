@@ -5,7 +5,7 @@ import os
 import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Any
+from typing import Any, cast
 
 from incubator_cwiki_mcp import cache
 
@@ -49,7 +49,7 @@ def confluence_request(path: str) -> dict[str, Any]:
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             body = response.read().decode("utf-8")
-        return json.loads(body)
+        return cast(dict[str, Any], json.loads(body))
     except json.JSONDecodeError as error:
         raise RuntimeError(f"Confluence returned non-JSON response: {body[:200]}") from error
     except urllib.error.HTTPError as error:
@@ -92,7 +92,7 @@ def get_page_by_title(title: str, *, force_refresh: bool = False) -> dict[str, A
         raise ValueError(f'No page found with title "{title}" in space {SPACE_KEY}.')
     if len(results) > 1:
         raise ValueError(f'More than one page matched title "{title}". Use page_id instead.')
-    return results[0]
+    return cast(dict[str, Any], results[0])
 
 
 def page_summary(page: dict[str, Any]) -> dict[str, Any]:
