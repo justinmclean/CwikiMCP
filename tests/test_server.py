@@ -125,6 +125,16 @@ def test_search_pages_returns_cql_and_text_excerpt(monkeypatch: pytest.MonkeyPat
     assert "body.view%2Cversion" in calls[0]
 
 
+def test_search_pages_title_only_uses_title_field(monkeypatch: pytest.MonkeyPatch):
+    calls = patch_request(monkeypatch, lambda path: result(page("99", "Podling Page"), limit=10))
+
+    response = tools.cwiki_search_pages("Podling", limit=5, title_only=True)
+
+    assert response["cql"] == 'space = "INCUBATOR" and type = page and title ~ "Podling"'
+    assert response["pages"][0]["title"] == "Podling Page"
+    assert calls[0].startswith("/rest/api/content/search?")
+
+
 def test_search_pages_rejects_empty_query():
     with pytest.raises(ValueError, match="query must not be empty"):
         tools.cwiki_search_pages("   ")

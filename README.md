@@ -58,7 +58,7 @@ Use the Python module entrypoint:
 
 - `cwiki_space_info`: return metadata for the configured Confluence space.
 - `cwiki_list_pages`: list pages in the Incubator space.
-- `cwiki_search_pages`: search pages with Confluence CQL.
+- `cwiki_search_pages`: search pages with Confluence CQL. Use `title_only=true` to match page titles only (faster and more precise for finding a specific page by name).
 - `cwiki_get_page`: fetch a page by title or `page_id`.
 - `cwiki_get_children`: list child pages for a `page_id`.
 - `cwiki_cache_info`: show local cache settings and size.
