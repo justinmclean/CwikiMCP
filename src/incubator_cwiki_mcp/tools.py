@@ -51,15 +51,21 @@ def cwiki_search_pages(
     query: str,
     limit: int = 10,
     start: int = 0,
+    title_only: bool = False,
     force_refresh: bool = False,
 ) -> dict[str, Any]:
-    """Search pages in the configured Apache Incubator Confluence space."""
+    """Search pages in the configured Apache Incubator Confluence space.
+
+    Set title_only=True to match against page titles only instead of full text.
+    Title search is faster and more precise when looking for a specific page by name.
+    """
     if not query.strip():
         raise ValueError("query must not be empty")
     validate_range("limit", limit, 1, 50)
     validate_range("start", start, 0, 1_000_000)
 
-    cql = f'space = "{escape_cql(client.SPACE_KEY)}" and type = page and text ~ "{escape_cql(query)}"'
+    field = "title" if title_only else "text"
+    cql = f'space = "{escape_cql(client.SPACE_KEY)}" and type = page and {field} ~ "{escape_cql(query)}"'
     pages = client.confluence_get(
         "/rest/api/content/search",
         {
